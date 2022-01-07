@@ -27,3 +27,7 @@ start a http server,and allow javascript communicate with actionscript by send p
 - complie and run it
 - open http://127.0.0.1:8080/index?a=5&b=10 in your browser
 - and obj.index function will be called.and you can see what recived in your console.
+
+# Where it from
+
+@chengse66 https://github.com/chengse66/as3-httpserver
