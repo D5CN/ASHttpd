@@ -49,7 +49,9 @@ package com.d5power.net.httpd
 					data.post = _request.queryString;
 					data.file = _request.files;
 					data.stream = _request.stream;
-					callfun(data);
+					var result:Object = callfun(data);
+					if(!result) result = {code:0,data:null,msg:"There are no return value in your decode function."};
+					this._response.writeUTFBytes(JSON.stringify(result));
 				}catch(err:Error){
 					_response.writeUTFBytes(JSON.stringify({code:-99,data:err.getStackTrace()}))
 				}
