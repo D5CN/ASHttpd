@@ -59,6 +59,12 @@ package com.d5power.net.httpd
 				case "xls":
 					extension="application/x-xls";
 					break;
+				case "css":
+					extension="text/css";
+					break;
+				case "js":
+					extension="text/javascript";
+					break;
 				case "txt":
 				case "log":
 					extension="text/plain";
