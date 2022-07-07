@@ -19,9 +19,9 @@ start a http server,and allow javascript communicate with actionscript by send p
         
         trace(JSON.stringify(data.post));
         
-        // this return object whill response to browser,so you can get this data in javascript or other language.
+        // this return object will response to browser,so you can get this data in javascript or other language.
         
-        // in broswer you will get data like this:{"data":{msg:"Hello ASHttpd"},"code":0}
+        // in broswer(or ajax request) you will get data like this:{"data":{msg:"Hello ASHttpd"},"code":0}
         
         return {msg:"Hello ASHttpd"};
         
