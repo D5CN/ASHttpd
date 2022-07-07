@@ -40,7 +40,7 @@ package com.d5power.net.httpd
 				var b:ByteArray = new ByteArray();
 				fs.readBytes(b,0,fs.bytesAvailable);
 				this._response.writeBytes(b,0,b.bytesAvailable)
-			}else if(ASHttpd.decoder && (callfun = ASHttpd.decoder[_request.url])){
+			}else if(ASHttpd.decoder && && ASHttpd.decoder.hasOwnProperty(_request.url) && (callfun = ASHttpd.decoder[_request.url])){
 				// no files,but hava same name function in decode,try to run it.
 				// if have any error,will return -99
 				try
