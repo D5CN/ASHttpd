@@ -15,9 +15,12 @@ start a http server,and allow javascript communicate with actionscript by send p
     obj.index = function(data:Object):Object
     {
     
-        // you can get data from data.post which sended by browser.
+        // you can get POST data from data.post which sended by browser.NOTICE: if there are no POST data,data.post will get GET data
         
         trace(JSON.stringify(data.post));
+        
+        // you can get GET data from data.get which sended by browser.
+        trace(JSON.stringify(data.get));
         
         // this return object will response to browser,so you can get this data in javascript or other language.
         
@@ -35,6 +38,16 @@ start a http server,and allow javascript communicate with actionscript by send p
 - complie and run it
 - open http://127.0.0.1:8080/index?a=5&b=10 in your browser
 - and obj.index function will be called.and you can see what recived in your console.
+
+# Cross domain support
+If you need your server can be loaded by cross domain request,Please use blow code:
+    var b:ASHttpd = new ASHttpd(File.applicationDirectory.resolvePath('wwwroot'),'127.0.0.1',8080,'*'); // allow all request
+    var b:ASHttpd = new ASHttpd(File.applicationDirectory.resolvePath('wwwroot'),'127.0.0.1',8080),'*.d5power.com'); // allow request from *.d5power.com
+
+# Allow connection from Other IP address
+In default,ASHttp can just allow request from localhost/127.0.0.1,if you need your sever allow connection from other ip address,please use 0.0.0.0 to init your server.just like this:
+
+    var b:ASHttpd = new ASHttpd(File.applicationDirectory.resolvePath('wwwroot'),'0.0.0.0',8080),'*.d5power.com'); // allow request from *.d5power.com
 
 # Where it from
 
