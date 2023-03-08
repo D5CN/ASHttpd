@@ -26,17 +26,20 @@ package  com.d5power.net.httpd
 			return _decoder;
 		}
 		
+		private var _corssdomain:String;
 		/**
 		 * @param	wwwroot		root path of webservice
 		 * @param	host		host address,127.0.0.1 by defalut
 		 * @param	port		listen port,60080 by defalut
+		 * @param	crossdomain	crossdomain setting,null for now allow cross doamin data loaded.* for allow all doamin loaded.
 		 */
-		public function ASHttpd(wwwroot:File=null,host:String='127.0.0.1',port:int=60080)
+		public function ASHttpd(wwwroot:File=null,host:String='127.0.0.1',port:int=60080,crossdomain:String=null)
 		{
-			socket=new ServerSocket();
+			socket = new ServerSocket();
 			socket.addEventListener(ServerSocketConnectEvent.CONNECT,_client_accept);
 			socket.bind(port,host);
 			this.wwwroot=wwwroot;
+			this._corssdomain = crossdomain;
 		}
 
 		/**
@@ -69,7 +72,7 @@ package  com.d5power.net.httpd
 		 * @param e
 		 */		
 		private function _client_accept(e:ServerSocketConnectEvent):void{
-			var context:HttpContext=new HttpContext(e.socket,e.socket.remoteAddress+":"+e.socket.remotePort);
+			var context:HttpContext=new HttpContext(e.socket,e.socket.remoteAddress+":"+e.socket.remotePort,this._corssdomain);
 			context.addEventListener(Event.COMPLETE,context_complete);
 		}
 		

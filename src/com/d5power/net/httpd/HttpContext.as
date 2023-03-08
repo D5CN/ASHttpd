@@ -15,13 +15,12 @@ package com.d5power.net.httpd
 		private var _response:HttpResponse;
 		private var _clientID:String;
 		private var _socket:Socket;
-
-		public function HttpContext(socket:Socket,clientID:String)
+		public function HttpContext(socket:Socket,clientID:String,crossdomain:String=null)
 		{
 			this._socket=socket;
 			this._clientID=clientID;
 			_request=new HttpRequest(_socket);
-			_response=new HttpResponse(_socket);
+			_response=new HttpResponse(_socket,crossdomain);
 			_request.addEventListener(Event.COMPLETE,request_complete);
 		}
 		
@@ -46,7 +45,8 @@ package com.d5power.net.httpd
 				try
 				{
 					var data:Object = {};
-					data.post = _request.queryString;
+					data.get = _request.queryString;
+					data.post = _request.hasPost ? _request.post : data.get;
 					data.file = _request.files;
 					data.stream = _request.stream;
 					var result:Object = callfun(data);

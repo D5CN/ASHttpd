@@ -51,6 +51,7 @@ package com.d5power.net.httpd
 		private var tmps:Array=[];
 		private var socket:Socket;
 		private var _buffer:ByteArray=new ByteArray();
+		private var _hasPost:Boolean = false;
 		
 		public function HttpRequest(socket:Socket)
 		{
@@ -58,6 +59,11 @@ package com.d5power.net.httpd
 			this.socket.addEventListener(ProgressEvent.SOCKET_DATA,reader_header);
 			sr=new HttpRequestReader(socket);
 			this.reset_clock();
+		}
+
+		public function get hasPost():Boolean
+		{
+			return _hasPost;
 		}
 		
 		/**
@@ -116,8 +122,10 @@ package com.d5power.net.httpd
 		private function reader_post(...args):void{
 			this.reset_clock();
 			sr.readLine();
+			trace("==================",sr.buffer.toString());
 			if (sr.byteReaded >= contentLength) {
 				socket.removeEventListener(ProgressEvent.SOCKET_DATA, reader_post);
+				
 				parse_url_data(sr.buffer.toString(),post);
 				reader_end();
 			}
@@ -173,6 +181,7 @@ package com.d5power.net.httpd
 							(sw as FileStream).close();
 							this.files[data.name]=data;
 						}else{
+							this._hasPost = true;
 							this.post[data.name]=_buffer.toString();
 						}
 						state=1;
@@ -304,10 +313,12 @@ package com.d5power.net.httpd
 		private function parse_url_data(text:String,data:Object):void{
 			REG_ENCODEURL.lastIndex = 0;
 			var list:Array = REG_ENCODEURL.exec(text);
+			
 			while (list != null) {
-				if(data==queryString){
+				if(data===queryString){
 					data[list[1]] =unescape(list[2]);
 				}else{
+					this._hasPost = true;
 					try{
 						data[list[1]] = decodeURIComponent(list[2]); 
 					}catch(e:Error){

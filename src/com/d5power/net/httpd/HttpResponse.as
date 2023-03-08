@@ -9,9 +9,11 @@ package com.d5power.net.httpd
 		public var header:Object={};
 		public var statusCode:int=200;
 		public var contentType:String="text/html";
+		private var _corssdomain:String;
 		
-		public function HttpResponse(socket:Socket)
+		public function HttpResponse(socket:Socket,crossdomain:String=null)
 		{
+			this._corssdomain = crossdomain;
 			this.socket=socket;	
 		}
 		
@@ -109,6 +111,10 @@ package com.d5power.net.httpd
 				socket.writeUTFBytes("HTTP/1.1 "+get_status_name(statusCode)+"\r\n");
 				socket.writeUTFBytes("Content-Type: "+contentType+"\r\n");
 				socket.writeUTFBytes("Content-Length:"+this.length+"\r\n");
+				if(this._corssdomain!=null)
+				{
+					socket.writeUTFBytes("Access-Control-Allow-Origin:"+this._corssdomain+"\r\n");
+				}
 				for(var i:Object in header) socket.writeUTFBytes(i+": "+String(header[i])+"\r\n");
 				socket.writeUTFBytes("\r\n");
 				socket.writeBytes(this,0,this.length);
