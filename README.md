@@ -12,15 +12,23 @@ start a http server,and allow javascript communicate with actionscript by send p
     
     var obj:Object = {};
     
-    obj.index = function(data:Object):void
+    obj.index = function(data:Object):Object
     {
     
-        trace(JSON.stringify(data));
+        // you can get data from data.post which sended by browser.
+        
+        trace(JSON.stringify(data.post));
+        
+        // this return object will response to browser,so you can get this data in javascript or other language.
+        
+        // in broswer(or ajax request) you will get data like this:{"data":{msg:"Hello ASHttpd"},"code":0}
+        
+        return {msg:"Hello ASHttpd"};
         
     }
 
     b.decoder = obj;
-
+    
     b.start();
     
 - [option]create wwwroot directory in your bin-debug path.if this directory not exist,root path will be bin-debug folder.
