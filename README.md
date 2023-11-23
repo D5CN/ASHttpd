@@ -1,9 +1,11 @@
 # ASHttpd
 A http webservice and Websocket service writen by actionscript3
+
 Support PC\MAC\Andorid\iOS
 
 # What ASHttpd can do
 start a http server,and allow javascript communicate with actionscript by send post/get data.
+
 It also support websocket,now your html file can connect to as websocket server,and the same way to call AS Function
 
 # How to use it with websocket
