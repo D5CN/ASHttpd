@@ -6,25 +6,24 @@ Support PC\MAC\Andorid\iOS
 # What ASHttpd can do
 start a http server,and allow javascript communicate with actionscript by send post/get data.
 
-It also support websocket,now your html file can connect to as websocket server,and the same way to call AS Function
+It also support websocket,now your html file can connect to AS websocket server,and the same way to call AS Function
 
 # How to use it with websocket
 - add ASHttpd.swc to your lib path
 - Use below code to create a websocket server in port 8081 (default port is 60081)
-
-    var ws:ASWebsocket = new ASWebsocket('0.0.0.0');
-  
-    var obj:Object = {};
-  
-    obj.ping = function(data:Object):Object{ return {data:pong}; }
-  
-    ws.start();
-  
-    ws.decoder = obj;
+        
+        var ws:ASWebsocket = new ASWebsocket('0.0.0.0',60081);
+        var obj:Object = {};
+    
+        obj.ping = function(data:Object):Object{ return {data:pong}; }
+        
+        ws.start();
+        ws.decoder = obj;
   
 
 Now,you can connect to this server with JS or other code.and if you push message {"do":"ping"} to server,the function ping in AS3 will called.and you will got message '{"data":"pong"}' in your client.
-If you want to transofm params to AS,you can push them in data param.just like this {"do":"ping","data":{"a":10}}. Then in function ping in AS3,you can read it from data.
+
+If you wantna transfer params to AS,you can push them in data param.just like this {"do":"ping","data":{"a":10}}. Then in function ping in AS3,you can read it from data.
 
     var obj:Object = {};
     obj.ping = function(data:Object):Object{
