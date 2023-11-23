@@ -8,6 +8,12 @@ package com.d5power.net.httpd
 		 * new coming
 		 */		
 		public static const NEW_CONTEXT:String="newContext";
+		/**
+		 * BIND_ERR
+		 */
+		public static const BIND_ERR:String = 'bind_error';
+
+		public static const BIND_SUCCESS:String = 'bin_success';
 		
 		private var _context:HttpContext;
 		
