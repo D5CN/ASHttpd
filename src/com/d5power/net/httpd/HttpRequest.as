@@ -88,6 +88,11 @@ package com.d5power.net.httpd
 				}else{
 					parse_header_end();
 					socket.removeEventListener(ProgressEvent.SOCKET_DATA,reader_header);
+					var checker:int = contentType.indexOf(';');
+					if(checker!=-1)
+					{
+						contentType = contentType.substring(0,checker);
+					}
 					switch(contentType){
 						case TEXT_HTML:
 						case TEXT_PLAIN:
