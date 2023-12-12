@@ -56,7 +56,7 @@ If you wantna transfer params to AS,you can push them in data param.just like th
         
             // this return object will response to browser,so you can get this data in javascript or other language.
         
-            // in broswer(or ajax request) you will get data like this:{"data":{msg:"Hello ASHttpd"},"code":0}
+            // in broswer(or ajax request) you will get data like this:{msg:"Hello ASHttpd"}
         
             return {msg:"Hello ASHttpd"};
         
@@ -71,6 +71,11 @@ If you wantna transfer params to AS,you can push them in data param.just like th
 - complie and run it
 - open http://127.0.0.1:8080/index?a=5&b=10 in your browser
 - and obj.index function will be called.and you can see what recived in your console.
+
+Send data from javascript,you can use these code(base on jquery)
+
+    $.post("http://127.0.0.1:60080/index",{a:10,b:"Hello ASHttpd"});
+    $.get("http://127.0.0.1:60080/index?a=10&b=Hello ASHttpd");
 
 # Cross domain support
 If you need your server can be loaded by cross domain request,Please use blow code:
