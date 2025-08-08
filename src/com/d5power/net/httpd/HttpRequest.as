@@ -73,7 +73,7 @@ package com.d5power.net.httpd
             return decodedString;
 		}
 
-		private const REG_ENCODEURL:RegExp = /([\w\d\.\/\:]+)\=([\w\d\%\.\/\:\-]+)/g;
+		private const REG_ENCODEURL:RegExp = /([\w\d\.\/\:]+)\=([^\&]+)/g;
 		private const REG_URL:RegExp = /\?.*+$/g;
 		private const REG_LINE:RegExp = /^[\w\d\-]+/;
 		private const REG_KEYPAIR:RegExp = /\w+\=\"[^"]+\"/g;
@@ -446,7 +446,12 @@ package com.d5power.net.httpd
 					this._hasPost = true;
 					try
 					{
-						data[list[1]] = decodeURIComponent(list[2]);
+						// 在application/x-www-form-urlencoded中，+应该被解码为空格
+						var value:String = list[2];
+						if (contentType == APPLICATION_X_WWW_FORM_URLENCODED) {
+							value = value.replace(/\+/g, "%20");
+						}
+						data[list[1]] = decodeURIComponent(value);
 					}
 					catch (e:Error)
 					{
