@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<application xmlns="http://ns.adobe.com/air/application/51.1">
+	<id>com.d5power.screenmatch</id>
+	<versionNumber>1.0.0</versionNumber>
+	<filename>Main</filename>
+    <architecture>64</architecture>
+	<name>D5ScreenMatch</name>
+	<initialWindow>
+		<content>SWF file name is set automatically at compile time</content>
+        <visible>true</visible>
+        <autoOrients>false</autoOrients>
+        <fullScreen>true</fullScreen>
+        <aspectRatio>landscape</aspectRatio>
+        <requestedDisplayResolution>high</requestedDisplayResolution>
+	</initialWindow>
+
+    <icon>
+		<image128x128>ui/logo.png</image128x128>
+	</icon> 
+
+    <windows>
+        <UseWebView2>true</UseWebView2>
+    </windows>
+
+	<supportedProfiles>extendedDesktop</supportedProfiles>
+</application>

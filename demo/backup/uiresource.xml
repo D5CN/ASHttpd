@@ -1,0 +1,4 @@
+<data nameString='' subUIResource='' width='200' height='200'>
+  <res path="ui/layout-left-fill.png" type="2" name="ui/layout-left-fill.png" posx="5" posy="4" offX="0" offY="0" w="48" h="48" cutx1="0" cuty1="0" cutx2="0" cuty2="0" label="" extData=""/>
+  <res path="ui/layout-top-fill.png" type="2" name="ui/layout-top-fill.png" posx="55" posy="5" offX="0" offY="0" w="48" h="48" cutx1="0" cuty1="0" cutx2="0" cuty2="0" label="" extData=""/>
+</data>

@@ -1,0 +1,40 @@
+{
+	"config": "airmobile",
+	"compilerOptions": {
+		"source-path": [
+			"src"
+        ],
+        "library-path": [
+            "libs/ASHttpd.swc",
+            "libs/D5BitmapUI.swc"
+		],
+		"output": "bin/Main.swf"
+    },
+    "airOptions": {
+        "android": {
+            "output": "bin/Main.apk",
+            "signingOptions": {
+                "storetype": "pkcs12",
+                "keystore": "cert/123.p12"
+            },
+            "arch": "armv8",
+            "listen": true
+        },
+        "files": [
+            {
+                "file": "resources/d5ui.res",
+                "path": "d5ui.res"
+            },
+            {
+                "file":"resources/logo.png",
+                "path":"ui/logo.png"
+            }, 
+            {
+                "file":"resources/font.swf",
+                "path":"font.swf"
+            }
+        ]
+	},
+	"mainClass": "Main",
+	"application": "src/Main-app-android.xml"
+}

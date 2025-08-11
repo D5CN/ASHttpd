@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<application xmlns="http://ns.adobe.com/air/application/51.2">
+	<id>com.d5power.screenmatch</id>
+	<versionNumber>1.0.0</versionNumber>
+	<filename>Main</filename>
+    <architecture>64</architecture>
+	<name>D5ScreenMatch</name>
+	<initialWindow>
+		<content>SWF file name is set automatically at compile time</content>
+        <visible>true</visible>
+        <autoOrients>true</autoOrients>
+        <fullScreen>true</fullScreen>
+        <aspectRatio>portrait</aspectRatio>
+        <!-- 
+        <aspectRatio>landscape</aspectRatio>
+        <aspectRatio>portrait</aspectRatio>
+        -->
+	</initialWindow>
+    <icon>
+		<image128x128>ui/logo.png</image128x128>
+	</icon> 
+    <android>
+        <manifestAdditions>
+            <![CDATA[
+            <manifest android:installLocation="auto">
+                <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="31" />
+                <uses-permission android:name="android.permission.INTERNET"/>
+                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+                <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+                <uses-permission android:name="android.permission.CAMERA"/>
+			    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+                <uses-configuration android:reqFiveWayNav="true"/>
+                <supports-screens android:normalScreens="true"/>
+                <uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>
+                <application android:enabled="true" android:hardwareAccelerated="true">
+                    <meta-data android:name="android.max_aspect" android:value="2.1" />
+                    <activity android:excludeFromRecents="false" android:hardwareAccelerated="true">
+                     <intent-filter>
+                         <action android:name="android.intent.action.MAIN"/>
+                         <category android:name="android.intent.category.LAUNCHER"/>
+                     </intent-filter>
+                    </activity>
+                 </application>
+             </manifest>
+         ]]>
+        </manifestAdditions>
+    </android>
+</application>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<application xmlns="http://ns.adobe.com/air/application/51.1">
+	<id>com.d5power.screenmatch</id>
+	<versionNumber>1.0.0</versionNumber>
+	<filename>Main</filename>
+	<name>D5ScreenMatch</name>
+	<initialWindow>
+		<content>SWF file name is set automatically at compile time</content>
+        <visible>true</visible>
+        <autoOrients>true</autoOrients>
+        <fullScreen>true</fullScreen>
+        <aspectRatio>portrait</aspectRatio>
+	</initialWindow>
+
+    <!-- iOS specific capabilities -->
+    <iPhone>
+        <!-- A list of plist key/value pairs to be added to the application Info.plist -->
+        <!-- UIDeviceFamily: 1 - iPhone/iPod Touch; 2 - iPad; both: universal app -->
+        <!--<launchScreen>/system/LaunchScreen.storyboardc</launchScreen>-->
+        <InfoAdditions><![CDATA[
+            <key>UIDeviceFamily</key>
+            <array>
+                <string>1</string>
+                <string>2</string>
+            </array>
+
+            <key>MinimumOSVersion</key>
+            <string>12.0</string>
+
+            <key>NSAppTransportSecurity</key>
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+                <key>NSCameraUsageDescription</key>
+                <string>This application need camera to keep contect with teacher</string>
+                
+                <key>NSMicrophoneUsageDescription</key>
+                <string>This application need microphone to keep contect with teacher</string>
+                
+                <key>NSPhotoLibraryUsageDescription</key>
+                <string>This application need Photo Library to submit your homework to teacher</string>
+            </dict>
+        ]]></InfoAdditions>
+
+        <Entitlements><![CDATA[
+            <key>get-task-allow</key>
+            <false/>
+        ]]></Entitlements>
+
+        <requestedDisplayResolution>high</requestedDisplayResolution>
+        <assetsCar>Assets.car</assetsCar>
+    </iPhone>
+    <!--
+    <extensions>
+        <extensionID>com.tuarua.WebViewANE</extensionID>
+        <extensionID>com.tuarua.FreSwift</extensionID>
+    </extensions>
+    -->
+</application>

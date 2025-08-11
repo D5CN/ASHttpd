@@ -1,0 +1,41 @@
+{
+	"config":"air",
+	"compilerOptions": {
+		"source-path": [
+            "src"
+        ],
+        "library-path": [
+            "libs/ASHttpd.swc",
+            "libs/D5BitmapUI.swc"
+		],
+		"output": "bin/Main.swf"
+    },
+    "airOptions": {
+        "extdir": [
+			"ane/"
+		],
+        "android": {
+            "output": "bin/Main.apk",
+            "signingOptions": {
+                "storetype": "pkcs12",
+                "keystore": "cert/123.p12"
+            },
+            "listen": true
+        },
+        "windows": {
+            "signingOptions": {
+                "storetype": "pkcs12",
+                "keystore": "cert/123.p12"
+            },
+            "output": "bin/",
+            "files": [
+                {
+                    "file": "src/d5ui.res",
+                    "path": "d5ui.res"
+                }
+            ]
+        }
+	},
+	"mainClass": "Main",
+	"application": "src/Main-app.xml"
+}

@@ -3,6 +3,9 @@ A http webservice and Websocket service writen by actionscript3
 
 Support PC\MAC\Andorid\iOS
 
+# Demo Project
+The demo/ directory stores an example project that is cross-platform compatible with automatic screen adaptation. Upon initialization, it launches AS3's native webview component. The implementation also includes a local web server (via ASHttpd) that facilitates host APP communication through get/post requests.
+
 # What ASHttpd can do
 start a http server,and allow javascript communicate with actionscript by send post/get data.
 

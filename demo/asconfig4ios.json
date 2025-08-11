@@ -1,0 +1,45 @@
+{
+	"config": "airmobile",
+	"compilerOptions": {
+		"source-path": [
+			"src"
+        ],
+        "library-path": [
+            "libs/ASHttpd.swc",
+            "libs/D5BitmapUI.swc"
+		],
+		"output": "bin/Main.swf"
+    },
+    "airOptions": {
+        
+        "ios":{
+            "output": "bin/Main.ipa",
+			"listen": true,
+			"signingOptions": {
+				"storetype": "pkcs12",
+				"keystore": "cert/d5.p12",
+				"provisioning-profile": "cert/d5.mobileprovision"
+			}
+        },
+        "files": [
+			{
+                "file": "resources/d5ui.res",
+                "path": "d5ui.res"
+            },
+            {
+                "file":"resources/logo.png",
+                "path":"ui/logo.png"
+            }, 
+            {
+                "file":"resources/font.swf",
+                "path":"font.swf"
+            },
+            {
+                "file":"www/",
+                "path":"www/"
+            }
+        ]
+	},
+	"mainClass": "Main",
+	"application": "src/Main-app-ios.xml"
+}
