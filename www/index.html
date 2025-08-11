@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <style>
+            .link{width:120px;height:36px;float:left;padding-left:10px}
+            .link a{font-size: 18px;}
+            .content{width:100vw;float:left}
+        </style>
+        <script src="layui.js"></script>
+    </head>
+    <body style="background-color: #ddd;overflow:hidden;">
+        <div class="link call_httpd">Click Here to Post long data to AS3</div>
+        <div id="info" class="content">Hello world</div>
+        <script>
+            let target = document.getElementById('info');
+            const onMessage = (event)=>{
+                    target.innerHTML = "CALLED<br>";
+                    target.innerHTML = event.origin+"<br>"+event.data + target.innerHTML
+                }
+            try{
+                target.innerHTML = "READY1"
+
+                window.chrome && window.chrome.webview.addEventListener("message",onMessage)
+                window.addEventListener("message",onMessage)
+
+                target.innerHTML = "READY2"
+            }catch(e){
+                target.innerHtml = e;
+            }
+
+            $ = layui.$;
+            $('.call_httpd').on('click',function(){
+                $.post("http://127.0.0.1:60080/debug?info=Hello world",{msg:`
+                    Troubleshooting
+Below are some steps that are required when troubleshooting issues that may be encountered when using the AIR SDK.
+
+ADT logging
+The AIR Developer Tool can log information when it's called to package up an application. Output is either to a file, or is sent to the AIR SDK Manager. The simplest way to see the information is to open up the AIR SDK Manager and go to the 'Troubleshooting' tab, and when ADT is next run, it will automatically connect and output the log information via this tool.
+
+To output to a file, you need to edit the "adt.cfg" configuration file which can be found under your home folder in an ".airsdk" subfolder - for example, /Users/username/.airsdk/adt.cfg, or /home/username/.airsdk/adt.cfg. Add or uncomment the line DebugOut=true - and from AIR SDK 51.2.1.4 there's also VerboseOut=true for additional outputs - and then next time you run ADT, it will generate a file called adt.log which will be in your home folder.
+
+Information from this logging is invaluable in finding out what's happening when packaging up an application bundle; passphrases are blanked out but application names/IDs and other potentially private information will still be in the log, so please check and sanitise it before providing this to HARMAN or posting it publicly.
+
+Android Studio usage
+If an Android packaging error occurs - particularly when you get a large amount of output detail from Gradle in the ADT build output - it is often worth opening up the project using Android Studio and trying to build using that. This can allow you to make tweaks to the configuration and settings (and would then help HARMAN to understand the issue and required changes) and can also be used to generate signed APK/AAB files for upload.
+
+The simplest way to create an Android Studio project folder is to use the "adt.cfg" configuration file (mentioned above) and setting an option KeepAndroidStudioOutput=true. When this value is set and ADT is used to package up an APK or AAB file, a new folder will be created alongside the application called AndroidStudioProject. This folder can then be opened in Android Studio and used for building.
+
+Alternatively, ADT can be called with the android-studio or android-studio-debug target; these have similar arguments to when you build an aab or aab-debug target, but instead of the output being an AAB file target, you should a name for a folder that will be generated which you can then open within Android Studio.
+
+In both cases, you may need to edit the 'app' folder's build.gradle file and change the passwords that are associated with your signing certificate: ADT passes these as environment variables when building, but these would not be available to your system after the ADT process finishes.
+
+iPhone/iPad/tvOS crash logs
+Due to the usage of AOT compilation and the fact that linking the executable for an IPA file happens on client computers, HARMAN does not have any debug symbol files that can be used to identify crash locations in iOS-based applications. To work around this restriction, AIR SDK 51.2.1.1 introduced a new configuration file setting of IPASymbolFile. This value should be set to a filename, for example "ipasyms.dat", and specifies the name of a file that ADT will generate when linking the executable for an IPA file. This is a binary format and can be provided to HARMAN along with a crash log from an iPhone (etc) in order for us to decipher the call stacks.
+
+To access the crash log on an iPhone/iPad, go into Settings and then "Privacy & Security", "Analytics & Improvements", "Analytics Data", and then look for your application filename in the list along with the date/time of the crash. This IPS file can be sent off the device using the 'send to' option at the top right of the screen. If this is provided to HARMAN along with the generated symbol binary file, it will help identify the problem area.
+
+macOS crash logs
+If a crash occurs on a macOS computer, the operating system should inform you and allow you to notify Apple of the crash. At this point you should see an option to view the crash report, and can then copy this information. This data should then be provided to HARMAN along with the exact version number of the AIR SDK that was being used.
+
+Windows crash logs
+On Windows, crashes can be viewed using the "Event Viewer" application which can be launched via the Start/Run option. Under "Windows Logs" and then the "Application" category, you can filter for the "Error" event level (note that it may take a few moments for your log to be populated). You should be able to click on the appropriate Application Error entry and can then copy the information from the "General" tab to provide this to HARMAN.
+
+Even more useful would be a mini-dump file - please see the Microsoft instructions for how to set up your computer to generate these files.
+                    `},(res)=>{
+                    target.innerHTML = res.GET.info+"<br>"+res.POST.msg;
+                },'json')
+            })
+            
+        </script>
+    </body>
+</html>
